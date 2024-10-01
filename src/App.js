@@ -1,23 +1,32 @@
-import logo from './logo.svg';
+
+import { useState } from 'react';
 import './App.css';
+import Footer from './components/Footer';
+import Header from './components/Header';
+import Info from './components/Info';
+import Main from './components/Main';
 
 function App() {
+  const [form,setForm]=useState([
+    {
+      text:"Learn React",
+      completed:true
+    },
+  ]);
+  
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <section className="todoapp">
+	    <Header form={form} addForm={setForm} />
+	
+	    <Main form={form} setForm={setForm} />
+
+	    <Footer/>
+    </section>
+
+    <Info/>
     </div>
   );
 }
