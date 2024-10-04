@@ -7,6 +7,7 @@ import Info from './components/Info';
 import Main from './components/Main';
 
 function App() {
+  const [filter,setFilter] = useState("all");
   const [form,setForm]=useState([
     {
       text:"Learn React",
@@ -21,9 +22,9 @@ function App() {
       <section className="todoapp">
 	    <Header form={form} addForm={setForm} />
 	
-	    <Main form={form} setForm={setForm} />
+	    <Main filter={filter} form={form} setForm={setForm} />
 
-	    <Footer/>
+	    <Footer setActiveFilter={setFilter} filter={filter} form={form} setForm={setForm} />
     </section>
 
     <Info/>

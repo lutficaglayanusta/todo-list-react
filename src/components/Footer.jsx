@@ -1,27 +1,35 @@
 import React from 'react'
 
-function Footer() {
+function Footer({setForm,form,filter,setActiveFilter}) {
+
+  function clearCompleted(){
+	const cleaned_todos = [...form];
+
+	const new_todos = cleaned_todos.filter((todo)=>!todo.completed)
+	setForm(new_todos)
+  }
+
   return (
     <div>
         <footer className="footer">
 		<span className="todo-count">
-			<strong>2</strong>
-			items left
+			<strong>{form.length}</strong>
+			item{form.length > 1 && 's'} left
 		</span>
 
 		<ul className="filters">
 			<li>
-				<a href="#/" className="selected">All</a>
+				<a href="#/" onClick={()=>setActiveFilter("all")} className={filter === "all" ? "selected" : ""}>All</a>
 			</li>
 			<li>
-				<a href="#/">Active</a>
+				<a href="#/" onClick={()=>setActiveFilter("active")} className={filter === "active" ? "selected" : ""}>Active</a>
 			</li>
 			<li>
-				<a href="#/">Completed</a>
+				<a href="#/" onClick={()=>setActiveFilter("completed")} className={filter === "completed" ? "selected" : ""}>Completed</a>
 			</li>
 		</ul>
 
-		<button className="clear-completed">
+		<button className="clear-completed" onClick={clearCompleted}>
 			Clear completed
 		</button>
 	</footer>

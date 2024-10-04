@@ -1,6 +1,8 @@
 import React from 'react'
 
-function Main({form,setForm}) {
+let filtered = null
+
+function Main({form,setForm,filter}) {
 	function onChange(text){
 		const cloned_form = [...form]
 		const ItemIndex = cloned_form.findIndex(item => item.text === text)
@@ -15,6 +17,12 @@ function Main({form,setForm}) {
 		setForm(cloned_form)
 	}
 
+	filtered = form
+
+	if(filter !== "all"){
+		filtered = form.filter((item)=>filter === "active" ? item.completed === false : item.completed === true )
+	}
+
   return (
     <div>
         <section className="main">
@@ -25,7 +33,7 @@ function Main({form,setForm}) {
 
 		<ul className="todo-list">
 			{
-				form.map((item,index)=>(
+				filtered.map((item,index)=>(
 					<li key={index} className={item.completed ? 'completed':''}>
 						<div className="view">
 							<input className="toggle" type="checkbox" checked={item.completed} onChange={()=>onChange(item.text)} />
